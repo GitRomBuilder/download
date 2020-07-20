@@ -2412,6 +2412,9 @@ function system.updateDesktop()
 	
 	local MineOSContextMenu = desktopMenu:addContextMenuItem("ShadowOS", 0x000000)
 	MineOSContextMenu:addItem(localization.aboutSystem).onTouch = function()
+		if keyboard.isShiftDown() then
+		GUI.alert("yes")
+		else
 		local container = GUI.addBackgroundContainer(workspace, true, true, localization.aboutSystem)
 		container.layout:removeChildren()
 		
