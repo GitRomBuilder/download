@@ -2428,6 +2428,7 @@ function system.updateDesktop()
 		textBox.eventHandler = container.panel.eventHandler
 
 		workspace:draw()
+		end
 	end
 
 	MineOSContextMenu:addItem(localization.updates).onTouch = function()
