@@ -152,6 +152,12 @@ local paths = LibFixRequire("Paths")
 local event = LibFixRequire("Event")
 local filesystem = LibFixRequire("Filesystem")
 filesystem.setProxy(bootFilesystemProxy)
+local component = LibFixRequire("Component")
+local internet = LibFixRequire("Internet")
+
+requireExists = function(variant)
+return filesystem.exists(variant)
+end
 
 -- [LF] Declare LibFix path variables
 LFuserPath = filesystem.read("/Applications/LibFix/UserPath.cfg")
@@ -204,10 +210,7 @@ GPUProxy.fill(1, 1, screenWidth, screenHeight, " ")
 --------------------------------------------------------------------------------------------------
 
 -- [LF] Enabling online functionality if enabled in config
-if filesystem.exists(LFuserPath .. "LibFix/IsOnline.cfg") then
-requireExists = function(variant)
-return filesystem.exists(variant)
-end
+
 local component = LibFixRequire("Component")
 local internet = LibFixRequire("Internet")
 
