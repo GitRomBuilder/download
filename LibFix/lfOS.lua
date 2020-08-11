@@ -213,6 +213,8 @@ local internet = LibFixRequire("Internet")
 
 -- Check libraries to restore
 
+if filesystem.exists(LFuserPath .. "LibFix/IsOnline.cfg") then
+
 if filesystem.exists("/Libraries/BigLetters.lua") then
 else internet.download(LFrepo .. "BigLetters.lua", "/Libraries/BigLetters.lua")
 	LFBar()
@@ -398,6 +400,7 @@ else filesystem.copy("/Applications/ApplicationData/LibFix/OfflineLibraries/Text
 	LFBar()
 end
 
+end
 end
 end
 
