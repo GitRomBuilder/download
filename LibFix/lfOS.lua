@@ -405,7 +405,6 @@ end
 
 end
 end
-end
 
 local GPUProxy = component.proxy(component.list("gpu")())
 local screenWidth, screenHeight = GPUProxy.getResolution()
