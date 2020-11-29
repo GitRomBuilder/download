@@ -152,12 +152,6 @@ local paths = LibFixRequire("Paths")
 local event = LibFixRequire("Event")
 local filesystem = LibFixRequire("Filesystem")
 filesystem.setProxy(bootFilesystemProxy)
-local component = LibFixRequire("Component")
-local internet = LibFixRequire("Internet")
-
-requireExists = function(variant)
-return filesystem.exists(variant)
-end
 
 -- [LF] Declare LibFix path variables
 LFuserPath = filesystem.read("/Applications/LibFix/UserPath.cfg")
@@ -194,7 +188,7 @@ local function LFBar()
 	return
 end
 
--- Preparing screen for repairing libraries
+-- Preparing screen for loading libraries
 GPUProxy.setBackground(0xE1E1E1)
 GPUProxy.fill(1, 1, screenWidth, screenHeight, " ")
 
@@ -210,13 +204,14 @@ GPUProxy.fill(1, 1, screenWidth, screenHeight, " ")
 --------------------------------------------------------------------------------------------------
 
 -- [LF] Enabling online functionality if enabled in config
-
+if filesystem.exists(LFuserPath .. "LibFix/IsOnline.cfg") then
+requireExists = function(variant)
+return filesystem.exists(variant)
+end
 local component = LibFixRequire("Component")
 local internet = LibFixRequire("Internet")
 
 -- Check libraries to restore
-
-if filesystem.exists(LFuserPath .. "LibFix/IsOnline.cfg") then
 
 if filesystem.exists("/Libraries/BigLetters.lua") then
 else internet.download(LFrepo .. "BigLetters.lua", "/Libraries/BigLetters.lua")
@@ -309,100 +304,7 @@ else internet.download(LFrepo .. "Text.lua", "/Libraries/Text.lua")
 end
 
 else
---offline mode
-
--- Check libraries to restore
-
-if filesystem.exists("/Libraries/BigLetters.lua") then
-else filesystem.copy("/Applications/ApplicationData/LibFix/OfflineLibraries/BigLetters.lua", "/Libraries/BigLetters.lua")
-	LFBar()
-end
-
-if filesystem.exists("/Libraries/Bit32.lua") then
-else filesystem.copy("/Applications/ApplicationData/LibFix/OfflineLibraries/Bit32.lua", "/Libraries/Bit32.lua")
-	LFBar()
-end
-
-if filesystem.exists("/Libraries/Color.lua") then
-else filesystem.copy("/Applications/ApplicationData/LibFix/OfflineLibraries/Color.lua", "/Libraries/Color.lua")
-	LFBar()
-end
-
-if filesystem.exists("/Libraries/Component.lua") then
-else filesystem.copy("/Applications/ApplicationData/LibFix/OfflineLibraries/Component.lua", "/Libraries/Component.lua")
-	LFBar()
-end
-
-if filesystem.exists("/Libraries/Compressor.lua") then
-else filesystem.copy("/Applications/ApplicationData/LibFix/OfflineLibraries/Compressor.lua", "/Libraries/Compressor.lua")
-	LFBar()
-end
-
-if filesystem.exists("/Libraries/Event.lua") then
-else filesystem.copy("/Applications/ApplicationData/LibFix/OfflineLibraries/Event.lua", "/Libraries/Event.lua")
-	LFBar()
-end
-
-if filesystem.exists("/Libraries/Filesystem.lua") then
-else filesystem.copy("/Applications/ApplicationData/LibFix/OfflineLibraries/Filesystem.lua", "/Libraries/Filesystem.lua")
-	LFBar()
-end
-
-if filesystem.exists("/Libraries/GUI.lua") then
-else filesystem.copy("/Applications/ApplicationData/LibFix/OfflineLibraries/GUI.lua", "/Libraries/GUI.lua")
-	LFBar()
-end
-
-if filesystem.exists("/Libraries/Image.lua") then
-else filesystem.copy("/Applications/ApplicationData/LibFix/OfflineLibraries/Image.lua", "/Libraries/Image.lua")
-	LFBar()
-end
-
-if filesystem.exists("/Libraries/Internet.lua") then
-else filesystem.copy("/Applications/ApplicationData/LibFix/OfflineLibraries/Internet.lua", "/Libraries/Internet.lua")
-	LFBar()
-end
-
-if filesystem.exists("/Libraries/Keyboard.lua") then
-else filesystem.copy("/Applications/ApplicationData/LibFix/OfflineLibraries/Keyboard.lua", "/Libraries/Keyboard.lua")
-	LFBar()
-end
-
-if filesystem.exists("/Libraries/Network.lua") then
-else filesystem.copy("/Applications/ApplicationData/LibFix/OfflineLibraries/Network.lua", "/Libraries/Network.lua")
-	LFBar()
-end
-
-if filesystem.exists("/Libraries/Number.lua") then
-else filesystem.copy("/Applications/ApplicationData/LibFix/OfflineLibraries/Number.lua", "/Libraries/Number.lua")
-	LFBar()
-end
-
-if filesystem.exists("/Libraries/Paths.lua") then
-else filesystem.copy("/Applications/ApplicationData/LibFix/OfflineLibraries/Paths.lua", "/Libraries/Paths.lua")
-	LFBar()
-end
-
-if filesystem.exists("/Libraries/Screen.lua") then
-else filesystem.copy("/Applications/ApplicationData/LibFix/OfflineLibraries/Screen.lua", "/Libraries/Screen.lua")
-	LFBar()
-end
-
-if filesystem.exists("/Libraries/SHA-256.lua") then
-else filesystem.copy("/Applications/ApplicationData/LibFix/OfflineLibraries/SHA-256.lua", "/Libraries/SHA-256.lua")
-	LFBar()
-end
-
-if filesystem.exists("/Libraries/System.lua") then
-else filesystem.copy("/Applications/ApplicationData/LibFix/OfflineLibraries/System.lua", "/Libraries/System.lua")
-	LFBar()
-end
-
-if filesystem.exists("/Libraries/Text.lua") then
-else filesystem.copy("/Applications/ApplicationData/LibFix/OfflineLibraries/Text.lua", "/Libraries/Text.lua")
-	LFBar()
-end
-
+-- offline placeholder
 end
 end
 
